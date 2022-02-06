@@ -37,8 +37,11 @@ const App = () => {
 
   useEffect(() => {
     checkNumber();
-    checkIfWinner();
   }, [allPlays]);
+
+  useEffect(() => {
+    checkIfWinner();
+  }, [isOne, isTwo, isThree, isFour, isFive, isSix, isSeven, isEight, isNine]);
 
   const allPlaysEvenorOdd = () => {
     return allPlays.length % 2 === 0 ? 'odd' : 'even';
@@ -53,6 +56,7 @@ const App = () => {
     setIsSix({ isTrue: false, isOddOrEven: null });
     setIsSeven({ isTrue: false, isOddOrEven: null });
     setIsEight({ isTrue: false, isOddOrEven: null });
+    setIsNine({ isTrue: false, isOddOrEven: null });
   };
 
   const checkNumber = () => {
@@ -85,14 +89,12 @@ const App = () => {
         setIsNine({ isTrue: true, isOddOrEven: allPlaysEvenorOdd() });
         break;
       default:
-        setIsOne({ isTrue: true, isOddOrEven: allPlaysEvenorOdd() });
         break;
     }
-    console.log(currentValue);
   };
 
   const checkIfWinner = () => {
-    console.log(allPlays);
+    console.log(isOne);
     if (
       allPlays.includes('1') &&
       allPlays.includes('2') &&
