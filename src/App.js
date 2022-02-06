@@ -12,31 +12,21 @@ const App = () => {
   const [currentValue, setCurrentValue] = useState(0);
   const [allPlays, setAllPlays] = useState([]);
   const [openModal, setOpenModal] = useState(false);
-  const [oddOrEven, setOddOrEven] = useState('');
+  // const [oddOrEven, setOddOrEven] = useState('');
 
-  const [isOne, setIsOne] = useState(false);
-  const [isTwo, setIsTwo] = useState(false);
-  const [isThree, setIsThree] = useState(false);
-  const [isFour, setIsFour] = useState(false);
-  const [isFive, setIsFive] = useState(false);
-  const [isSix, setIsSix] = useState(false);
-  const [isSeven, setIsSeven] = useState(false);
-  const [isEight, setIsEight] = useState(false);
-  const [isNine, setIsNine] = useState(false);
-
-  const [oneValue, setOneValue] = useState(null);
-  const [twoValue, setTwoValue] = useState(null);
-  const [threeValue, setThreeValue] = useState(null);
-  const [fourValue, setFourValue] = useState(null);
-  const [fiveValue, setFiveValue] = useState(null);
-  const [sixValue, setSixValue] = useState(null);
-  const [sevenValue, setSevenValue] = useState(null);
-  const [eightValue, setEightValue] = useState(null);
-  const [nineValue, setNineValue] = useState(null);
+  const [isOne, setIsOne] = useState({ isTrue: false, isOddOrEven: null });
+  const [isTwo, setIsTwo] = useState({ isTrue: false, isOddOrEven: null });
+  const [isThree, setIsThree] = useState({ isTrue: false, isOddOrEven: null });
+  const [isFour, setIsFour] = useState({ isTrue: false, isOddOrEven: null });
+  const [isFive, setIsFive] = useState({ isTrue: false, isOddOrEven: null });
+  const [isSix, setIsSix] = useState({ isTrue: false, isOddOrEven: null });
+  const [isSeven, setIsSeven] = useState({ isTrue: false, isOddOrEven: null });
+  const [isEight, setIsEight] = useState({ isTrue: false, isOddOrEven: null });
+  const [isNine, setIsNine] = useState({ isTrue: false, isOddOrEven: null });
 
   const handleClose = () => {
     setOpenModal(false);
-    setAllPlays([]);
+
     clearBoard();
   };
 
@@ -46,8 +36,8 @@ const App = () => {
   };
 
   useEffect(() => {
-    checkIfWinner();
     checkNumber();
+    checkIfWinner();
   }, [allPlays]);
 
   const allPlaysEvenorOdd = () => {
@@ -55,143 +45,302 @@ const App = () => {
   };
 
   const clearBoard = () => {
-    setIsOne(null);
-    setIsTwo(null);
-    setIsThree(null);
-    setIsFour(null);
-    setIsFive(null);
-    setIsSix(null);
-    setIsSeven(null);
-    setIsEight(null);
-    setIsNine(null);
-    setIsTwo(null);
+    setIsOne({ isTrue: false, isOddOrEven: null });
+    setIsTwo({ isTrue: false, isOddOrEven: null });
+    setIsThree({ isTrue: false, isOddOrEven: null });
+    setIsFour({ isTrue: false, isOddOrEven: null });
+    setIsFive({ isTrue: false, isOddOrEven: null });
+    setIsSix({ isTrue: false, isOddOrEven: null });
+    setIsSeven({ isTrue: false, isOddOrEven: null });
+    setIsEight({ isTrue: false, isOddOrEven: null });
   };
 
   const checkNumber = () => {
-    if (currentValue === '1') {
-      setOddOrEven(!oddOrEven);
-      setIsOne(true);
-      setOneValue(allPlaysEvenorOdd());
-    } else if (currentValue === '2') {
-      setOddOrEven(!oddOrEven);
-      setIsTwo(true);
-      setTwoValue(allPlaysEvenorOdd());
-    } else if (currentValue === '3') {
-      setOddOrEven(!oddOrEven);
-      setIsThree(true);
-      setThreeValue(allPlaysEvenorOdd());
-    } else if (currentValue === '4') {
-      setOddOrEven(!oddOrEven);
-      setIsFour(true);
-      setFourValue(allPlaysEvenorOdd());
-    } else if (currentValue === '5') {
-      setOddOrEven(!oddOrEven);
-      setIsFive(true);
-      setFiveValue(allPlaysEvenorOdd());
-    } else if (currentValue === '6') {
-      setOddOrEven(!oddOrEven);
-      setIsSix(true);
-      setSixValue(allPlaysEvenorOdd());
-    } else if (currentValue === '7') {
-      setOddOrEven(!oddOrEven);
-      setIsSeven(true);
-      setSevenValue(allPlaysEvenorOdd());
-    } else if (currentValue === '8') {
-      setOddOrEven(!oddOrEven);
-      setIsEight(true);
-      setEightValue(allPlaysEvenorOdd());
-    } else if (currentValue === '9') {
-      setOddOrEven(!oddOrEven);
-      setIsNine(true);
-      setNineValue(allPlaysEvenorOdd());
+    switch (currentValue) {
+      case '1':
+        setIsOne({ isTrue: true, isOddOrEven: allPlaysEvenorOdd() });
+        break;
+      case '2':
+        setIsTwo({ isTrue: true, isOddOrEven: allPlaysEvenorOdd() });
+        break;
+      case '3':
+        setIsThree({ isTrue: true, isOddOrEven: allPlaysEvenorOdd() });
+        break;
+      case '4':
+        setIsFour({ isTrue: true, isOddOrEven: allPlaysEvenorOdd() });
+        break;
+      case '5':
+        setIsFive({ isTrue: true, isOddOrEven: allPlaysEvenorOdd() });
+        break;
+      case '6':
+        setIsSix({ isTrue: true, isOddOrEven: allPlaysEvenorOdd() });
+        break;
+      case '7':
+        setIsSeven({ isTrue: true, isOddOrEven: allPlaysEvenorOdd() });
+        break;
+      case '8':
+        setIsEight({ isTrue: true, isOddOrEven: allPlaysEvenorOdd() });
+        break;
+      case '9':
+        setIsNine({ isTrue: true, isOddOrEven: allPlaysEvenorOdd() });
+        break;
+      default:
+        setIsOne({ isTrue: true, isOddOrEven: allPlaysEvenorOdd() });
+        break;
     }
+    console.log(currentValue);
   };
 
   const checkIfWinner = () => {
+    console.log(allPlays);
     if (
       allPlays.includes('1') &&
       allPlays.includes('2') &&
       allPlays.includes('3') &&
-      ((oneValue === 'odd' && twoValue === 'odd' && threeValue === 'odd') ||
-        (oneValue === 'even' && twoValue === 'even' && threeValue === 'even'))
+      ((isOne.isOddOrEven === 'odd' &&
+        isTwo.isOddOrEven === 'odd' &&
+        isThree.isOddOrEven === 'odd') ||
+        (isOne.isOddOrEven === 'even' &&
+          isTwo.isOddOrEven === 'even' &&
+          isThree.isOddOrEven === 'even'))
     ) {
-      setOpenModal(true);
-      setAllPlays([]);
-      setCurrentValue(0);
+      if (
+        isOne.isOddOrEven === 'odd' &&
+        isTwo.isOddOrEven === 'odd' &&
+        isThree.isOddOrEven === 'odd'
+      ) {
+        setOpenModal(true);
+
+        setCurrentValue(0);
+        console.log('all os at 123');
+      }
+      if (
+        isOne.isOddOrEven === 'even' &&
+        isTwo.isOddOrEven === 'even' &&
+        isThree.isOddOrEven === 'even'
+      ) {
+        setOpenModal(true);
+
+        setCurrentValue(0);
+        console.log('all xs at 123');
+      }
     } else if (
       allPlays.includes('4') &&
       allPlays.includes('5') &&
       allPlays.includes('6') &&
-      ((fourValue === 'odd' && fiveValue === 'odd' && sixValue === 'odd') ||
-        (fourValue === 'even' && fiveValue === 'even' && sixValue === 'even'))
+      ((isFour.isOddOrEven === 'odd' &&
+        isFive.isOddOrEven === 'odd' &&
+        isSix.isOddOrEven === 'odd') ||
+        (isFour.isOddOrEven === 'even' &&
+          isFive.isOddOrEven === 'even' &&
+          isSix.isOddOrEven === 'even'))
     ) {
-      setOpenModal(true);
-      setAllPlays([]);
-      setCurrentValue(0);
+      if (
+        isFour.isOddOrEven === 'odd' &&
+        isFive.isOddOrEven === 'odd' &&
+        isSix.isOddOrEven === 'odd'
+      ) {
+        setOpenModal(true);
+
+        setCurrentValue(0);
+        console.log('all os at 456');
+      }
+      if (
+        isFour.isOddOrEven === 'even' &&
+        isFive.isOddOrEven === 'even' &&
+        isSix.isOddOrEven === 'even'
+      ) {
+        setOpenModal(true);
+
+        setCurrentValue(0);
+        console.log('all xs at 456');
+      }
     } else if (
       allPlays.includes('7') &&
       allPlays.includes('8') &&
       allPlays.includes('9') &&
-      ((sevenValue === 'odd' && eightValue === 'odd' && nineValue === 'odd') ||
-        (sevenValue === 'even' &&
-          eightValue === 'even' &&
-          nineValue === 'even'))
+      ((isSeven.isOddOrEven === 'odd' &&
+        isEight.isOddOrEven === 'odd' &&
+        isNine.isOddOrEven === 'odd') ||
+        (isSeven.isOddOrEven === 'even' &&
+          isEight.isOddOrEven === 'even' &&
+          isNine.isOddOrEven === 'even'))
     ) {
-      setOpenModal(true);
-      setAllPlays([]);
-      setCurrentValue(0);
+      if (
+        isSeven.isOddOrEven === 'odd' &&
+        isEight.isOddOrEven === 'odd' &&
+        isNine.isOddOrEven === 'odd'
+      ) {
+        setOpenModal(true);
+
+        setCurrentValue(0);
+        console.log('all os at 789');
+      }
+      if (
+        isSeven.isOddOrEven === 'even' &&
+        isEight.isOddOrEven === 'even' &&
+        isNine.isOddOrEven === 'even'
+      ) {
+        setOpenModal(true);
+
+        setCurrentValue(0);
+        console.log('all xs at 789');
+      }
     } else if (
       allPlays.includes('1') &&
       allPlays.includes('4') &&
       allPlays.includes('7') &&
-      ((oneValue === 'odd' && fourValue === 'odd' && sevenValue === 'odd') ||
-        (oneValue === 'even' && fourValue === 'even' && sevenValue === 'even'))
+      ((isOne.isOddOrEven === 'odd' &&
+        isFour.isOddOrEven === 'odd' &&
+        isSeven.isOddOrEven === 'odd') ||
+        (isOne.isOddOrEven === 'even' &&
+          isFour.isOddOrEven === 'even' &&
+          isSeven.isOddOrEven === 'even'))
     ) {
-      setOpenModal(true);
-      setAllPlays([]);
-      setCurrentValue(0);
+      if (
+        isOne.isOddOrEven === 'odd' &&
+        isFour.isOddOrEven === 'odd' &&
+        isSeven.isOddOrEven === 'odd'
+      ) {
+        setOpenModal(true);
+
+        setCurrentValue(0);
+        console.log('all os at 147');
+      }
+      if (
+        isOne.isOddOrEven === 'even' &&
+        isFour.isOddOrEven === 'even' &&
+        isSeven.isOddOrEven === 'even'
+      ) {
+        setOpenModal(true);
+
+        setCurrentValue(0);
+        console.log('all xs at 147');
+      }
     } else if (
       allPlays.includes('2') &&
       allPlays.includes('5') &&
       allPlays.includes('8') &&
-      ((twoValue === 'odd' && fiveValue === 'odd' && eightValue === 'odd') ||
-        (twoValue === 'even' && fiveValue === 'even' && eightValue === 'even'))
+      ((isTwo.isOddOrEven === 'odd' &&
+        isFive.isOddOrEven === 'odd' &&
+        isEight.isOddOrEven === 'odd') ||
+        (isTwo.isOddOrEven === 'even' &&
+          isFive.isOddOrEven === 'even' &&
+          isEight.isOddOrEven === 'even'))
     ) {
-      setOpenModal(true);
-      setAllPlays([]);
-      setCurrentValue(0);
+      if (
+        isTwo.isOddOrEven === 'odd' &&
+        isFive.isOddOrEven === 'odd' &&
+        isEight.isOddOrEven === 'odd'
+      ) {
+        setOpenModal(true);
+
+        setCurrentValue(0);
+        console.log('all os at 258');
+      }
+      if (
+        isTwo.isOddOrEven === 'even' &&
+        isFive.isOddOrEven === 'even' &&
+        isEight.isOddOrEven === 'even'
+      ) {
+        setOpenModal(true);
+
+        setCurrentValue(0);
+        console.log('all xs at 258');
+      }
     } else if (
       allPlays.includes('3') &&
       allPlays.includes('6') &&
       allPlays.includes('9') &&
-      ((threeValue === 'odd' && sixValue === 'odd' && nineValue === 'odd') ||
-        (threeValue === 'even' && sixValue === 'even' && nineValue === 'even'))
+      ((isThree.isOddOrEven === 'odd' &&
+        isSix.isOddOrEven === 'odd' &&
+        isNine.isOddOrEven === 'odd') ||
+        (isThree.isOddOrEven === 'even' &&
+          isSix.isOddOrEven === 'even' &&
+          isNine.isOddOrEven === 'even'))
     ) {
-      setOpenModal(true);
-      setAllPlays([]);
-      setCurrentValue(0);
+      if (
+        isThree.isOddOrEven === 'odd' &&
+        isSix.isOddOrEven === 'odd' &&
+        isNine.isOddOrEven === 'odd'
+      ) {
+        setOpenModal(true);
+
+        setCurrentValue(0);
+        console.log('all os at 369');
+      }
+      if (
+        isThree.isOddOrEven === 'even' &&
+        isSix.isOddOrEven === 'even' &&
+        isNine.isOddOrEven === 'even'
+      ) {
+        setOpenModal(true);
+
+        setCurrentValue(0);
+        console.log('all xs at 369');
+      }
     } else if (
       allPlays.includes('3') &&
       allPlays.includes('5') &&
       allPlays.includes('7') &&
-      ((threeValue === 'odd' && fiveValue === 'odd' && sevenValue === 'odd') ||
-        (threeValue === 'even' &&
-          fiveValue === 'even' &&
-          sevenValue === 'even'))
+      ((isThree.isOddOrEven === 'odd' &&
+        isFive.isOddOrEven === 'odd' &&
+        isSeven.isOddOrEven === 'odd') ||
+        (isThree.isOddOrEven === 'even' &&
+          isFive.isOddOrEven === 'even' &&
+          isSeven.isOddOrEven === 'even'))
     ) {
-      setOpenModal(true);
-      setAllPlays([]);
-      setCurrentValue(0);
+      if (
+        isThree.isOddOrEven === 'odd' &&
+        isFive.isOddOrEven === 'odd' &&
+        isSeven.isOddOrEven === 'odd'
+      ) {
+        setOpenModal(true);
+
+        setCurrentValue(0);
+        console.log('all os at 357');
+      }
+      if (
+        isThree.isOddOrEven === 'even' &&
+        isFive.isOddOrEven === 'even' &&
+        isSeven.isOddOrEven === 'even'
+      ) {
+        setOpenModal(true);
+
+        setCurrentValue(0);
+        console.log('all xs at 357');
+      }
     } else if (
       allPlays.includes('1') &&
       allPlays.includes('5') &&
       allPlays.includes('9') &&
-      ((oneValue === 'odd' && fiveValue === 'odd' && nineValue === 'odd') ||
-        (oneValue === 'even' && fiveValue === 'even' && nineValue === 'even'))
+      ((isOne.isOddOrEven === 'odd' &&
+        isFive.isOddOrEven === 'odd' &&
+        isNine.isOddOrEven === 'odd') ||
+        (isOne.isOddOrEven === 'even' &&
+          isFive.isOddOrEven === 'even' &&
+          isNine.isOddOrEven === 'even'))
     ) {
-      setOpenModal(true);
-      setAllPlays([]);
-      setCurrentValue(0);
+      if (
+        isOne.isOddOrEven === 'odd' &&
+        isFive.isOddOrEven === 'odd' &&
+        isNine.isOddOrEven === 'odd'
+      ) {
+        setOpenModal(true);
+
+        setCurrentValue(0);
+        console.log('all os at 159');
+      }
+      if (
+        isOne.isOddOrEven === 'even' &&
+        isFive.isOddOrEven === 'even' &&
+        isNine.isOddOrEven === 'even'
+      ) {
+        setOpenModal(true);
+
+        setCurrentValue(0);
+        console.log('all xs at 359');
+      }
     }
   };
 
@@ -206,9 +355,9 @@ const App = () => {
             value='1'
             onClick={(e) => handleClick(e)}
           >
-            {isOne && oneValue === 'even'
+            {isOne.isTrue && isOne.isOddOrEven === 'even'
               ? 'X'
-              : isOne && oneValue === 'odd'
+              : isOne.isTrue && isOne.isOddOrEven === 'odd'
               ? 'O'
               : ''}
           </Button>
@@ -219,9 +368,9 @@ const App = () => {
             value='2'
             onClick={(e) => handleClick(e)}
           >
-            {isTwo && twoValue === 'even'
+            {isTwo.isTrue && isTwo.isOddOrEven === 'even'
               ? 'X'
-              : isTwo && twoValue === 'odd'
+              : isTwo.isTrue && isTwo.isOddOrEven === 'odd'
               ? 'O'
               : ''}
           </Button>
@@ -232,9 +381,9 @@ const App = () => {
             value='3'
             onClick={(e) => handleClick(e)}
           >
-            {isThree && threeValue === 'even'
+            {isThree.isTrue && isThree.isOddOrEven === 'even'
               ? 'X'
-              : isThree && threeValue === 'odd'
+              : isThree.isTrue && isThree.isOddOrEven === 'odd'
               ? 'O'
               : ''}
           </Button>
@@ -246,9 +395,9 @@ const App = () => {
             value='4'
             onClick={(e) => handleClick(e)}
           >
-            {isFour && fourValue === 'even'
+            {isFour.isTrue && isFour.isOddOrEven === 'even'
               ? 'X'
-              : isFour && fourValue === 'odd'
+              : isFour.isTrue && isFour.isOddOrEven === 'odd'
               ? 'O'
               : ''}
           </Button>
@@ -259,9 +408,9 @@ const App = () => {
             value='5'
             onClick={(e) => handleClick(e)}
           >
-            {isFive && fiveValue === 'even'
+            {isFive.isTrue && isFive.isOddOrEven === 'even'
               ? 'X'
-              : isFive && fiveValue === 'odd'
+              : isFive.isTrue && isFive.isOddOrEven === 'odd'
               ? 'O'
               : ''}
           </Button>
@@ -272,9 +421,9 @@ const App = () => {
             value='6'
             onClick={(e) => handleClick(e)}
           >
-            {isSix && sixValue === 'even'
+            {isSix.isTrue && isSix.isOddOrEven === 'even'
               ? 'X'
-              : isSix && sixValue === 'odd'
+              : isSix.isTrue && isSix.isOddOrEven === 'odd'
               ? 'O'
               : ''}
           </Button>
@@ -286,9 +435,9 @@ const App = () => {
             value='7'
             onClick={(e) => handleClick(e)}
           >
-            {isSeven && sevenValue === 'even'
+            {isSeven.isTrue && isSeven.isOddOrEven === 'even'
               ? 'X'
-              : isSeven && sevenValue === 'odd'
+              : isSeven.isTrue && isSeven.isOddOrEven === 'odd'
               ? 'O'
               : ''}
           </Button>
@@ -299,9 +448,9 @@ const App = () => {
             value='8'
             onClick={(e) => handleClick(e)}
           >
-            {isEight && eightValue === 'even'
+            {isEight.isTrue && isEight.isOddOrEven === 'even'
               ? 'X'
-              : isEight && eightValue === 'odd'
+              : isEight.isTrue && isEight.isOddOrEven === 'odd'
               ? 'O'
               : ''}
           </Button>
@@ -312,9 +461,9 @@ const App = () => {
             value='9'
             onClick={(e) => handleClick(e)}
           >
-            {isNine && nineValue === 'even'
+            {isNine.isTrue && isNine.isOddOrEven === 'even'
               ? 'X'
-              : isNine && nineValue === 'odd'
+              : isNine.isTrue && isNine.isOddOrEven === 'odd'
               ? 'O'
               : ''}
           </Button>
