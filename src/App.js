@@ -7,7 +7,6 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import CardHeader from '@mui/material/CardHeader';
 
 import ModalWinOrLose from './Components/ModalWinOrLose';
 import StartMenu from './Components/StartMenu';
@@ -55,6 +54,7 @@ const App = () => {
     turn: false,
     guesses: [],
   });
+  const [tiedModal, setTiedModal] = useState(false);
 
   const [openModal, setOpenModal] = useState({
     open: false,
@@ -160,6 +160,7 @@ const App = () => {
     clearBoard();
     setPlayer1({ ...player1, guesses: [] });
     setPlayer2({ ...player2, guesses: [] });
+    setTiedModal(false);
   };
 
   const handleStartOver = () => {
@@ -169,8 +170,9 @@ const App = () => {
   };
 
   const handleClick = (e) => {
+    let filteredAllPlays = allPlays.filter((item) => item !== e.target.value);
     setCurrentValue(e.target.value);
-    setAllPlays([...allPlays, e.target.value]);
+    setAllPlays([...filteredAllPlays, e.target.value]);
   };
 
   useEffect(() => {
@@ -189,6 +191,7 @@ const App = () => {
   };
 
   const clearBoard = () => {
+    setAllPlays([]);
     setIsOne({ isTrue: false, isOddOrEven: null });
     setIsTwo({ isTrue: false, isOddOrEven: null });
     setIsThree({ isTrue: false, isOddOrEven: null });
@@ -203,95 +206,132 @@ const App = () => {
   const checkNumber = () => {
     switch (currentValue) {
       case '1':
-        setIsOne({
-          isTrue: true,
-          isOddOrEven: allPlaysEvenorOdd().isOddEven,
-          playerGuess: allPlaysEvenorOdd().player,
-        });
-        console.log(setIsOne.playerGuess);
-        allPlaysEvenorOdd().player === 'player1'
-          ? setPlayer1({ ...player1, guesses: [...player1.guesses, '1'] })
-          : setPlayer2({ ...player2, guesses: [...player2.guesses, '1'] });
+        if (!isOne.isTrue) {
+          setIsOne({
+            isTrue: true,
+            isOddOrEven: allPlaysEvenorOdd().isOddEven,
+            playerGuess: allPlaysEvenorOdd().player,
+          });
+          console.log(setIsOne.playerGuess);
+          allPlaysEvenorOdd().player === 'player1'
+            ? setPlayer1({ ...player1, guesses: [...player1.guesses, '1'] })
+            : setPlayer2({ ...player2, guesses: [...player2.guesses, '1'] });
+        } else {
+          console.log('alreadyguessed');
+        }
+
         break;
       case '2':
-        setIsTwo({
-          isTrue: true,
-          isOddOrEven: allPlaysEvenorOdd().isOddEven,
-          playerGuess: allPlaysEvenorOdd().player,
-        });
-        allPlaysEvenorOdd().player === 'player1'
-          ? setPlayer1({ ...player1, guesses: [...player1.guesses, '2'] })
-          : setPlayer2({ ...player2, guesses: [...player2.guesses, '2'] });
+        if (!isTwo.isTrue) {
+          setIsTwo({
+            isTrue: true,
+            isOddOrEven: allPlaysEvenorOdd().isOddEven,
+            playerGuess: allPlaysEvenorOdd().player,
+          });
+          allPlaysEvenorOdd().player === 'player1'
+            ? setPlayer1({ ...player1, guesses: [...player1.guesses, '2'] })
+            : setPlayer2({ ...player2, guesses: [...player2.guesses, '2'] });
+        } else {
+          console.log('alreadyguessed');
+        }
         break;
       case '3':
-        setIsThree({
-          isTrue: true,
-          isOddOrEven: allPlaysEvenorOdd().isOddEven,
-          playerGuess: allPlaysEvenorOdd().player,
-        });
-        allPlaysEvenorOdd().player === 'player1'
-          ? setPlayer1({ ...player1, guesses: [...player1.guesses, '3'] })
-          : setPlayer2({ ...player2, guesses: [...player2.guesses, '3'] });
+        if (!isThree.isTrue) {
+          setIsThree({
+            isTrue: true,
+            isOddOrEven: allPlaysEvenorOdd().isOddEven,
+            playerGuess: allPlaysEvenorOdd().player,
+          });
+          allPlaysEvenorOdd().player === 'player1'
+            ? setPlayer1({ ...player1, guesses: [...player1.guesses, '3'] })
+            : setPlayer2({ ...player2, guesses: [...player2.guesses, '3'] });
+        } else {
+          console.log('alreadyguessed');
+        }
         break;
       case '4':
-        setIsFour({
-          isTrue: true,
-          isOddOrEven: allPlaysEvenorOdd().isOddEven,
-          playerGuess: allPlaysEvenorOdd().player,
-        });
-        setIsFour.playerGuess === 'player1'
-          ? setPlayer1({ ...player1, guesses: [...player1.guesses, '4'] })
-          : setPlayer2({ ...player2, guesses: [...player2.guesses, '4'] });
+        if (!isFour.isTrue) {
+          setIsFour({
+            isTrue: true,
+            isOddOrEven: allPlaysEvenorOdd().isOddEven,
+            playerGuess: allPlaysEvenorOdd().player,
+          });
+          allPlaysEvenorOdd().player === 'player1'
+            ? setPlayer1({ ...player1, guesses: [...player1.guesses, '4'] })
+            : setPlayer2({ ...player2, guesses: [...player2.guesses, '4'] });
+        } else {
+          console.log('alreadyguessed');
+        }
         break;
       case '5':
-        setIsFive({
-          isTrue: true,
-          isOddOrEven: allPlaysEvenorOdd().isOddEven,
-          playerGuess: allPlaysEvenorOdd().player,
-        });
-        allPlaysEvenorOdd().player === 'player1'
-          ? setPlayer1({ ...player1, guesses: [...player1.guesses, '5'] })
-          : setPlayer2({ ...player2, guesses: [...player2.guesses, '5'] });
+        if (!isFive.isTrue) {
+          setIsFive({
+            isTrue: true,
+            isOddOrEven: allPlaysEvenorOdd().isOddEven,
+            playerGuess: allPlaysEvenorOdd().player,
+          });
+          allPlaysEvenorOdd().player === 'player1'
+            ? setPlayer1({ ...player1, guesses: [...player1.guesses, '5'] })
+            : setPlayer2({ ...player2, guesses: [...player2.guesses, '5'] });
+        } else {
+          console.log('alreadyguessed');
+        }
         break;
       case '6':
-        setIsSix({
-          isTrue: true,
-          isOddOrEven: allPlaysEvenorOdd().isOddEven,
-          playerGuess: allPlaysEvenorOdd().player,
-        });
-        allPlaysEvenorOdd().player === 'player1'
-          ? setPlayer1({ ...player1, guesses: [...player1.guesses, '6'] })
-          : setPlayer2({ ...player2, guesses: [...player2.guesses, '6'] });
+        if (!isSix.isTrue) {
+          setIsSix({
+            isTrue: true,
+            isOddOrEven: allPlaysEvenorOdd().isOddEven,
+            playerGuess: allPlaysEvenorOdd().player,
+          });
+          allPlaysEvenorOdd().player === 'player1'
+            ? setPlayer1({ ...player1, guesses: [...player1.guesses, '6'] })
+            : setPlayer2({ ...player2, guesses: [...player2.guesses, '6'] });
+        } else {
+          console.log('alreadyguessed');
+        }
         break;
       case '7':
-        setIsSeven({
-          isTrue: true,
-          isOddOrEven: allPlaysEvenorOdd().isOddEven,
-          playerGuess: allPlaysEvenorOdd().player,
-        });
-        allPlaysEvenorOdd().player === 'player1'
-          ? setPlayer1({ ...player1, guesses: [...player1.guesses, '7'] })
-          : setPlayer2({ ...player2, guesses: [...player2.guesses, '7'] });
+        if (!isSeven.isTrue) {
+          setIsSeven({
+            isTrue: true,
+            isOddOrEven: allPlaysEvenorOdd().isOddEven,
+            playerGuess: allPlaysEvenorOdd().player,
+          });
+          allPlaysEvenorOdd().player === 'player1'
+            ? setPlayer1({ ...player1, guesses: [...player1.guesses, '7'] })
+            : setPlayer2({ ...player2, guesses: [...player2.guesses, '7'] });
+        } else {
+          console.log('alreadyguessed');
+        }
         break;
       case '8':
-        setIsEight({
-          isTrue: true,
-          isOddOrEven: allPlaysEvenorOdd().isOddEven,
-          playerGuess: allPlaysEvenorOdd().player,
-        });
-        allPlaysEvenorOdd().player === 'player1'
-          ? setPlayer1({ ...player1, guesses: [...player1.guesses, '8'] })
-          : setPlayer2({ ...player2, guesses: [...player2.guesses, '8'] });
+        if (!isEight.isTrue) {
+          setIsEight({
+            isTrue: true,
+            isOddOrEven: allPlaysEvenorOdd().isOddEven,
+            playerGuess: allPlaysEvenorOdd().player,
+          });
+          allPlaysEvenorOdd().player === 'player1'
+            ? setPlayer1({ ...player1, guesses: [...player1.guesses, '8'] })
+            : setPlayer2({ ...player2, guesses: [...player2.guesses, '8'] });
+        } else {
+          console.log('alreadyguessed');
+        }
         break;
       case '9':
-        setIsNine({
-          isTrue: true,
-          isOddOrEven: allPlaysEvenorOdd().isOddEven,
-          playerGuess: allPlaysEvenorOdd().player,
-        });
-        allPlaysEvenorOdd().player === 'player1'
-          ? setPlayer1({ ...player1, guesses: [...player1.guesses, '9'] })
-          : setPlayer2({ ...player2, guesses: [...player2.guesses, '9'] });
+        if (!isNine.isTrue) {
+          setIsNine({
+            isTrue: true,
+            isOddOrEven: allPlaysEvenorOdd().isOddEven,
+            playerGuess: allPlaysEvenorOdd().player,
+          });
+          allPlaysEvenorOdd().player === 'player1'
+            ? setPlayer1({ ...player1, guesses: [...player1.guesses, '9'] })
+            : setPlayer2({ ...player2, guesses: [...player2.guesses, '9'] });
+        } else {
+          console.log('alreadyguessed');
+        }
         break;
       default:
         break;
@@ -305,7 +345,7 @@ const App = () => {
       allPlays.includes('2') &&
       allPlays.includes('3') &&
       ((isOne.isOddOrEven === 'odd' &&
-        isTwo.isOddOrEven === 'odd' &&
+        isThree.isOddOrEven === 'odd' &&
         isThree.isOddOrEven === 'odd') ||
         (isOne.isOddOrEven === 'even' &&
           isTwo.isOddOrEven === 'even' &&
@@ -613,16 +653,23 @@ const App = () => {
         setPlayer2({ ...player2, losses: player2.losses + 1 });
         setCurrentValue(0);
       }
+    } else if (allPlays.length === 9) {
+      console.log('tied game');
+      setTiedModal(true);
     }
   };
 
   return startGame ? (
     <ThemeProvider theme={theme}>
-      <Box className='overall-container' sx={{ flexGrow: 1 }}>
-        <ModalWinOrLose handleCloseModal={handleClose} showModal={openModal} />
+      <Box className='overall-container' sx={{ flexGrow: 4 }}>
+        <ModalWinOrLose
+          tiedModal={tiedModal}
+          handleCloseModal={handleClose}
+          showModal={openModal}
+        />
         <Card>
           <CardContent>
-            <Grid container sx={{ maxWidth: '450px', padding: '10px' }}>
+            <Grid container sx={{ padding: '10px' }}>
               <Grid item xs={12} sx={{ marginBottom: '10px' }}>
                 <Typography variant='h4'>Tic-Tac-Toe</Typography>
                 <hr></hr>

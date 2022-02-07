@@ -22,9 +22,47 @@ const style = {
 };
 
 const ModalWinOrLose = (props) => {
-  const { handleCloseModal, showModal } = props;
+  const { handleCloseModal, showModal, tiedModal } = props;
   const { open, player, message } = showModal;
-  return (
+  return tiedModal ? (
+    <div>
+      <Modal
+        open={tiedModal}
+        onClose={handleCloseModal}
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Box sx={style}>
+          <Grid container>
+            <Grid item xs={12}>
+              <Typography id='modal-modal-title' variant='h6'>
+                You tied!
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography id='modal-modal-description' sx={{ mt: 2 }}>
+                There was no winner
+              </Typography>
+            </Grid>
+            <Grid item sx={{ textAlign: 'center', mt: 2 }} xs={12}>
+              <Button
+                variant='contained'
+                sx={{ color: 'primary' }}
+                onClick={handleCloseModal}
+              >
+                Play again
+              </Button>
+            </Grid>
+          </Grid>
+        </Box>
+      </Modal>
+    </div>
+  ) : (
     <div>
       <Modal
         open={open}
