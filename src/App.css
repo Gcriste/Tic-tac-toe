@@ -1,3 +1,43 @@
+body {
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#207cca+7,207cca+7,b6d0e2+28,b6d0e2+39,2989d8+66,7db9e8+100 */
+  background: #207cca; /* Old browsers */
+  background: -moz-linear-gradient(
+    top,
+    #207cca 7%,
+    #207cca 7%,
+    #b6d0e2 28%,
+    #b6d0e2 39%,
+    #2989d8 66%,
+    #7db9e8 100%
+  ); /* FF3.6-15 */
+  background: -webkit-linear-gradient(
+    top,
+    #207cca 7%,
+    #207cca 7%,
+    #b6d0e2 28%,
+    #b6d0e2 39%,
+    #2989d8 66%,
+    #7db9e8 100%
+  ); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #207cca 7%,
+    #207cca 7%,
+    #b6d0e2 28%,
+    #b6d0e2 39%,
+    #2989d8 66%,
+    #7db9e8 100%
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#207cca', endColorstr='#7db9e8',GradientType=0 ); /* IE6-9 */
+  height: 100%;
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .overall-container {
   margin: 40px;
 }

@@ -7,6 +7,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import CardHeader from '@mui/material/CardHeader';
 
 import ModalWinOrLose from './Components/ModalWinOrLose';
 import StartMenu from './Components/StartMenu';
@@ -624,7 +625,9 @@ const App = () => {
             <Grid container sx={{ maxWidth: '450px', padding: '10px' }}>
               <Grid item xs={12} sx={{ marginBottom: '10px' }}>
                 <Typography variant='h4'>Tic-Tac-Toe</Typography>
+                <hr></hr>
               </Grid>
+
               <Grid className='item-container' item xs={4}>
                 <Button
                   className='button-div button-1'

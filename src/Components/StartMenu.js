@@ -1,7 +1,6 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -25,6 +24,12 @@ const StartMenu = (props) => {
     <>
       <CardContent>
         <Grid container sx={{ maxWidth: '450px', padding: '10px' }}>
+          <Grid item xs={12}>
+            <Typography variant='h4' sx={{ marginTop: '10px' }}>
+              Tic-Tac-Toe
+            </Typography>
+            <hr></hr>
+          </Grid>
           <Grid item xs={8} sx={{ m: 1 }}>
             <Typography variant='h5'>Enter player 1 name</Typography>
           </Grid>
@@ -51,6 +56,12 @@ const StartMenu = (props) => {
     <>
       <CardContent>
         <Grid container sx={{ maxWidth: '450px', padding: '10px' }}>
+          <Grid item xs={12}>
+            <Typography variant='h4' sx={{ marginTop: '10px' }}>
+              Tic-Tac-Toe
+            </Typography>
+            <hr></hr>
+          </Grid>
           <Grid item xs={8} sx={{ m: 1 }}>
             <Typography variant='h5'>Enter player 2 name</Typography>
           </Grid>
