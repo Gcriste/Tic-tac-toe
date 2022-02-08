@@ -192,6 +192,7 @@ const App = () => {
 
   const clearBoard = () => {
     setAllPlays([]);
+    setIsNine({ isTrue: false, isOddOrEven: null });
     setIsOne({ isTrue: false, isOddOrEven: null });
     setIsTwo({ isTrue: false, isOddOrEven: null });
     setIsThree({ isTrue: false, isOddOrEven: null });
@@ -200,7 +201,7 @@ const App = () => {
     setIsSix({ isTrue: false, isOddOrEven: null });
     setIsSeven({ isTrue: false, isOddOrEven: null });
     setIsEight({ isTrue: false, isOddOrEven: null });
-    setIsNine({ isTrue: false, isOddOrEven: null });
+    setCurrentValue(0);
   };
 
   const checkNumber = () => {
