@@ -18,6 +18,7 @@ const StartMenu = (props) => {
     player2Letters,
     handleKey1Down,
     handleKey2Down,
+    handlePlayComputer,
   } = props;
 
   const player1Card = (
@@ -43,8 +44,12 @@ const StartMenu = (props) => {
               onKeyDown={(e) => handleKey1Down(e)}
             />
           </Grid>
-          <Grid item xs={12} sx={{ m: 1 }}>
-            <Button variant='contained' onClick={handlePlayer1Submit}>
+          <Grid item xs={12} sx={{ mt: 2, m: 1 }}>
+            <Button
+              sx={{ mt: 5 }}
+              variant='contained'
+              onClick={handlePlayer1Submit}
+            >
               Submit
             </Button>
           </Grid>
@@ -62,10 +67,10 @@ const StartMenu = (props) => {
             </Typography>
             <hr></hr>
           </Grid>
-          <Grid item xs={8} sx={{ m: 1 }}>
+          <Grid item xs={12} sx={{ m: 1 }}>
             <Typography variant='h5'>Enter player 2 name</Typography>
           </Grid>
-          <Grid item xs={6} sx={{ m: 1 }}>
+          <Grid item xs={12} sx={{ m: 1 }}>
             <TextField
               id='outlined-basic'
               label='Player 2'
@@ -75,9 +80,23 @@ const StartMenu = (props) => {
               onKeyDown={(e) => handleKey2Down(e)}
             />
           </Grid>
-          <Grid item xs={12} sx={{ m: 1 }}>
-            <Button variant='contained' onClick={handlePlayer2Submit}>
+          <Grid item xs={3}>
+            <Button
+              sx={{ mt: 5 }}
+              variant='contained'
+              onClick={handlePlayer2Submit}
+            >
               Submit
+            </Button>
+          </Grid>
+          <Grid item xs={9}>
+            <Button
+              sx={{ mt: 5, color: 'white' }}
+              color='neutral'
+              variant='contained'
+              onClick={handlePlayComputer}
+            >
+              Play against computer
             </Button>
           </Grid>
         </Grid>

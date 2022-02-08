@@ -26,8 +26,9 @@ const App = () => {
       success: {
         main: '#9AD0EC',
       },
+
       neutral: {
-        main: '#64748B',
+        main: '#3b9c3b',
         contrastText: '#fff',
       },
       secondary: {
@@ -170,9 +171,35 @@ const App = () => {
   };
 
   const handleClick = (e) => {
-    let filteredAllPlays = allPlays.filter((item) => item !== e.target.value);
-    setCurrentValue(e.target.value);
-    setAllPlays([...filteredAllPlays, e.target.value]);
+    if (player2.name === 'Computer') {
+      let filteredAllPlays = allPlays.filter((item) => item !== e.target.value);
+      setCurrentValue(e.target.value);
+      setAllPlays([...filteredAllPlays, e.target.value]);
+      setTimeout(generateComputerMove, 3000);
+    } else {
+      let filteredAllPlays = allPlays.filter((item) => item !== e.target.value);
+      setCurrentValue(e.target.value);
+      setAllPlays([...filteredAllPlays, e.target.value]);
+    }
+  };
+
+  const generateComputerMove = () => {
+    let randomNumber = Math.floor(Math.random() * 10);
+    let filteredAllPlays = allPlays.filter((item) => item !== randomNumber);
+    setCurrentValue(randomNumber);
+    setAllPlays([...filteredAllPlays, randomNumber]);
+  };
+
+  const handlePlayComputer = () => {
+    setPlayer2({
+      name: 'Computer',
+      wins: 0,
+      losses: 0,
+      turn: false,
+      guesses: [],
+    });
+    setPlayer2Letters('');
+    setStartGame(true);
   };
 
   useEffect(() => {
@@ -855,6 +882,7 @@ const App = () => {
           handlePlayer1Submit={handlePlayer1Submit}
           handlePlayer2Change={handlePlayer2Change}
           handlePlayer2Submit={handlePlayer2Submit}
+          handlePlayComputer={handlePlayComputer}
         />
       </ThemeProvider>
     </>
