@@ -159,8 +159,8 @@ const App = () => {
   const handleClose = () => {
     setOpenModal({ open: false, player: 0, message: '' });
     clearBoard();
-    // setPlayer1({ ...player1, guesses: [], turn: true });
-    // setPlayer2({ ...player2, guesses: [], turn: false });
+    setPlayer1({ ...player1, guesses: [], turn: true });
+    setPlayer2({ ...player2, guesses: [], turn: false });
     setTiedModal(false);
   };
 
@@ -171,24 +171,39 @@ const App = () => {
   };
 
   const handleClick = (e) => {
-    let filteredAllPlays = allPlays.filter((item) => item !== e.target.value);
-    setCurrentValue(e.target.value);
-    setAllPlays([...filteredAllPlays, e.target.value]);
-    if (player1.turn) {
-      setPlayer1({ ...player1, turn: false });
-      setPlayer2({ ...player2, turn: true });
+    if (
+      player1.guesses.includes(e.target.value) ||
+      player2.guesses.includes(e.target.value)
+    ) {
+      console.log('already guessed');
+    } else {
+      let filteredAllPlays = allPlays.filter((item) => item !== e.target.value);
+
+      setCurrentValue(e.target.value);
+      setAllPlays([...filteredAllPlays, e.target.value]);
+      if (player1.turn) {
+        setPlayer1({ ...player1, turn: false });
+        setPlayer2({ ...player2, turn: true });
+      }
     }
   };
 
   const generateComputerMove = () => {
     let randomNumber = (Math.floor(Math.random() * 9) + 1).toString();
-    let filteredAllPlays = allPlays.filter((item) => item !== randomNumber);
-    setCurrentValue(randomNumber);
-    setAllPlays([...filteredAllPlays, randomNumber]);
-    // if (!player2.turn) {
-    //   setPlayer1({ ...player1, turn: false });
-    //   setPlayer2({ ...player2, turn: true });
-    // }
+    if (
+      player1.guesses.includes(randomNumber) ||
+      player2.guesses.includes(randomNumber)
+    ) {
+      console.log('already guessed');
+      generateComputerMove();
+    } else {
+      setPlayer1({ ...player1, turn: true });
+      setPlayer2({ ...player2, turn: false });
+
+      let filteredAllPlays = allPlays.filter((item) => item !== randomNumber);
+      setCurrentValue(randomNumber);
+      setAllPlays([...filteredAllPlays, randomNumber]);
+    }
   };
 
   const handlePlayComputer = () => {
@@ -210,9 +225,7 @@ const App = () => {
   useEffect(() => {
     checkIfWinner();
     if (player2.name === 'Computer' && player2.turn) {
-      setPlayer1({ ...player1, turn: true });
-      setPlayer2({ ...player2, turn: false });
-      setTimeout(generateComputerMove, 3000);
+      setTimeout(generateComputerMove, 2000);
     }
   }, [isOne, isTwo, isThree, isFour, isFive, isSix, isSeven, isEight, isNine]);
 
