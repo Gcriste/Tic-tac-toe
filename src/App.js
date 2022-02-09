@@ -171,20 +171,14 @@ const App = () => {
   };
 
   const handleClick = (e) => {
-    if (player2.name === 'Computer') {
-      let filteredAllPlays = allPlays.filter((item) => item !== e.target.value);
-      setCurrentValue(e.target.value);
-      setAllPlays([...filteredAllPlays, e.target.value]);
-      setTimeout(generateComputerMove, 3000);
-    } else {
-      let filteredAllPlays = allPlays.filter((item) => item !== e.target.value);
-      setCurrentValue(e.target.value);
-      setAllPlays([...filteredAllPlays, e.target.value]);
-    }
+    let filteredAllPlays = allPlays.filter((item) => item !== e.target.value);
+    setCurrentValue(e.target.value);
+    setAllPlays([...filteredAllPlays, e.target.value]);
   };
+  console.log(allPlays);
 
   const generateComputerMove = () => {
-    let randomNumber = Math.floor(Math.random() * 10);
+    let randomNumber = (Math.floor(Math.random() * 10) + 1).toString();
     let filteredAllPlays = allPlays.filter((item) => item !== randomNumber);
     setCurrentValue(randomNumber);
     setAllPlays([...filteredAllPlays, randomNumber]);
@@ -204,6 +198,9 @@ const App = () => {
 
   useEffect(() => {
     checkNumber();
+    if (player2.name === 'Computer' && !player2.turn) {
+      setTimeout(generateComputerMove, 3000);
+    }
   }, [allPlays]);
 
   useEffect(() => {
@@ -240,12 +237,11 @@ const App = () => {
             isOddOrEven: allPlaysEvenorOdd().isOddEven,
             playerGuess: allPlaysEvenorOdd().player,
           });
-          console.log(setIsOne.playerGuess);
+
           allPlaysEvenorOdd().player === 'player1'
             ? setPlayer1({ ...player1, guesses: [...player1.guesses, '1'] })
             : setPlayer2({ ...player2, guesses: [...player2.guesses, '1'] });
         } else {
-          console.log('alreadyguessed');
         }
 
         break;
@@ -367,7 +363,6 @@ const App = () => {
   };
 
   const checkIfWinner = () => {
-    console.log(isOne);
     if (
       allPlays.includes('1') &&
       allPlays.includes('2') &&
