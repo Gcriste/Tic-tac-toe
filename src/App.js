@@ -159,14 +159,14 @@ const App = () => {
   const handleClose = () => {
     setOpenModal({ open: false, player: 0, message: '' });
     clearBoard();
-    setPlayer1({ ...player1, guesses: [] });
-    setPlayer2({ ...player2, guesses: [] });
+    // setPlayer1({ ...player1, guesses: [], turn: true });
+    // setPlayer2({ ...player2, guesses: [], turn: false });
     setTiedModal(false);
   };
 
   const handleStartOver = () => {
-    setPlayer1({ name: '', wins: 0, losses: 0 });
-    setPlayer2({ name: '', wins: 0, losses: 0 });
+    setPlayer1({ name: '', wins: 0, losses: 0, turn: true });
+    setPlayer2({ name: '', wins: 0, losses: 0, turn: false });
     setStartGame(false);
   };
 
@@ -174,14 +174,21 @@ const App = () => {
     let filteredAllPlays = allPlays.filter((item) => item !== e.target.value);
     setCurrentValue(e.target.value);
     setAllPlays([...filteredAllPlays, e.target.value]);
+    if (player1.turn) {
+      setPlayer1({ ...player1, turn: false });
+      setPlayer2({ ...player2, turn: true });
+    }
   };
-  console.log(allPlays);
 
   const generateComputerMove = () => {
-    let randomNumber = (Math.floor(Math.random() * 10) + 1).toString();
+    let randomNumber = (Math.floor(Math.random() * 9) + 1).toString();
     let filteredAllPlays = allPlays.filter((item) => item !== randomNumber);
     setCurrentValue(randomNumber);
     setAllPlays([...filteredAllPlays, randomNumber]);
+    // if (!player2.turn) {
+    //   setPlayer1({ ...player1, turn: false });
+    //   setPlayer2({ ...player2, turn: true });
+    // }
   };
 
   const handlePlayComputer = () => {
@@ -198,13 +205,15 @@ const App = () => {
 
   useEffect(() => {
     checkNumber();
-    if (player2.name === 'Computer' && !player2.turn) {
-      setTimeout(generateComputerMove, 3000);
-    }
   }, [allPlays]);
 
   useEffect(() => {
     checkIfWinner();
+    if (player2.name === 'Computer' && player2.turn) {
+      setPlayer1({ ...player1, turn: true });
+      setPlayer2({ ...player2, turn: false });
+      setTimeout(generateComputerMove, 3000);
+    }
   }, [isOne, isTwo, isThree, isFour, isFive, isSix, isSeven, isEight, isNine]);
 
   const allPlaysEvenorOdd = () => {
@@ -384,8 +393,8 @@ const App = () => {
           player: player2.name,
           message: `${player2.name} won on the top row!`,
         });
-        setPlayer2({ ...player2, wins: player2.wins + 1 });
-        setPlayer1({ ...player1, losses: player1.losses + 1 });
+        setPlayer2({ ...player2, wins: player2.wins + 1, turn: false });
+        setPlayer1({ ...player1, losses: player1.losses + 1, turn: true });
         setCurrentValue(0);
       }
       if (
@@ -398,8 +407,8 @@ const App = () => {
           player: player1.name,
           message: `${player1.name} won on the top row!`,
         });
-        setPlayer1({ ...player1, wins: player1.wins + 1 });
-        setPlayer2({ ...player2, losses: player2.losses + 1 });
+        setPlayer1({ ...player1, wins: player1.wins + 1, turn: true });
+        setPlayer2({ ...player2, losses: player2.losses + 1, turn: false });
         setCurrentValue(0);
       }
     } else if (
@@ -423,8 +432,8 @@ const App = () => {
           player: player2.name,
           message: `${player2.name} won on the middle row!`,
         });
-        setPlayer2({ ...player2, wins: player2.wins + 1 });
-        setPlayer1({ ...player1, losses: player1.losses + 1 });
+        setPlayer2({ ...player2, wins: player2.wins + 1, turn: false });
+        setPlayer1({ ...player1, losses: player1.losses + 1, turn: true });
         setCurrentValue(0);
       }
       if (
@@ -437,8 +446,8 @@ const App = () => {
           player: player1.name,
           message: `${player1.name} won on the middle row!`,
         });
-        setPlayer1({ ...player1, wins: player1.wins + 1 });
-        setPlayer2({ ...player2, losses: player2.losses + 1 });
+        setPlayer1({ ...player1, wins: player1.wins + 1, turn: true });
+        setPlayer2({ ...player2, losses: player2.losses + 1, turn: false });
 
         setCurrentValue(0);
       }
@@ -463,8 +472,8 @@ const App = () => {
           player: player2.name,
           message: `${player2.name} won on the bottom row!`,
         });
-        setPlayer2({ ...player2, wins: player2.wins + 1 });
-        setPlayer1({ ...player1, losses: player1.losses + 1 });
+        setPlayer2({ ...player2, wins: player2.wins + 1, turn: false });
+        setPlayer1({ ...player1, losses: player1.losses + 1, turn: true });
         setCurrentValue(0);
       }
       if (
@@ -477,8 +486,8 @@ const App = () => {
           player: player1.name,
           message: `${player1.name} won on the bottom row!`,
         });
-        setPlayer1({ ...player1, wins: player1.wins + 1 });
-        setPlayer2({ ...player2, losses: player2.losses + 1 });
+        setPlayer1({ ...player1, wins: player1.wins + 1, turn: true });
+        setPlayer2({ ...player2, losses: player2.losses + 1, turn: false });
         setCurrentValue(0);
       }
     } else if (
@@ -502,8 +511,8 @@ const App = () => {
           player: player2.name,
           message: `${player2.name} won on the left column!`,
         });
-        setPlayer2({ ...player2, wins: player2.wins + 1 });
-        setPlayer1({ ...player1, losses: player1.losses + 1 });
+        setPlayer2({ ...player2, wins: player2.wins + 1, turn: false });
+        setPlayer1({ ...player1, losses: player1.losses + 1, turn: true });
         setCurrentValue(0);
       }
       if (
@@ -516,8 +525,8 @@ const App = () => {
           player: player1.name,
           message: `${player1.name} won on the left column!`,
         });
-        setPlayer1({ ...player1, wins: player1.wins + 1 });
-        setPlayer2({ ...player2, losses: player2.losses + 1 });
+        setPlayer1({ ...player1, wins: player1.wins + 1, turn: true });
+        setPlayer2({ ...player2, losses: player2.losses + 1, turn: false });
         setCurrentValue(0);
       }
     } else if (
@@ -541,8 +550,8 @@ const App = () => {
           player: player2.name,
           message: `${player2.name} won on the middle column!`,
         });
-        setPlayer2({ ...player2, wins: player2.wins + 1 });
-        setPlayer1({ ...player1, losses: player1.losses + 1 });
+        setPlayer2({ ...player2, wins: player2.wins + 1, turn: false });
+        setPlayer1({ ...player1, losses: player1.losses + 1, turn: true });
         setCurrentValue(0);
       }
       if (
@@ -555,8 +564,8 @@ const App = () => {
           player: player1.name,
           message: `${player1.name} won on the middle column!`,
         });
-        setPlayer1({ ...player1, wins: player1.wins + 1 });
-        setPlayer2({ ...player2, losses: player2.losses + 1 });
+        setPlayer1({ ...player1, wins: player1.wins + 1, turn: true });
+        setPlayer2({ ...player2, losses: player2.losses + 1, turn: false });
         setCurrentValue(0);
       }
     } else if (
@@ -580,8 +589,8 @@ const App = () => {
           player: player2.name,
           message: `${player2.name} won on the right column!`,
         });
-        setPlayer2({ ...player2, wins: player2.wins + 1 });
-        setPlayer1({ ...player1, losses: player1.losses + 1 });
+        setPlayer2({ ...player2, wins: player2.wins + 1, turn: false });
+        setPlayer1({ ...player1, losses: player1.losses + 1, turn: true });
         setCurrentValue(0);
       }
       if (
@@ -594,8 +603,8 @@ const App = () => {
           player: player1.name,
           message: `${player1.name} won on the right column!`,
         });
-        setPlayer1({ ...player1, wins: player1.wins + 1 });
-        setPlayer2({ ...player2, losses: player2.losses + 1 });
+        setPlayer1({ ...player1, wins: player1.wins + 1, turn: true });
+        setPlayer2({ ...player2, losses: player2.losses + 1, turn: false });
         setCurrentValue(0);
       }
     } else if (
@@ -619,8 +628,8 @@ const App = () => {
           player: player2.name,
           message: `${player2.name} won diagnoally!`,
         });
-        setPlayer2({ ...player2, wins: player2.wins + 1 });
-        setPlayer1({ ...player1, losses: player1.losses + 1 });
+        setPlayer2({ ...player2, wins: player2.wins + 1, turn: false });
+        setPlayer1({ ...player1, losses: player1.losses + 1, turn: true });
         setCurrentValue(0);
       }
       if (
@@ -633,8 +642,8 @@ const App = () => {
           player: player1.name,
           message: `${player1.name} won diagnoally!`,
         });
-        setPlayer1({ ...player1, wins: player1.wins + 1 });
-        setPlayer2({ ...player2, losses: player2.losses + 1 });
+        setPlayer1({ ...player1, wins: player1.wins + 1, turn: true });
+        setPlayer2({ ...player2, losses: player2.losses + 1, turn: false });
         setCurrentValue(0);
       }
     } else if (
@@ -658,8 +667,8 @@ const App = () => {
           player: player2.name,
           message: `${player2.name} won diagnoally!`,
         });
-        setPlayer2({ ...player2, wins: player2.wins + 1 });
-        setPlayer1({ ...player1, losses: player1.losses + 1 });
+        setPlayer2({ ...player2, wins: player2.wins + 1, turn: false });
+        setPlayer1({ ...player1, losses: player1.losses + 1, turn: true });
         setCurrentValue(0);
       }
       if (
@@ -672,8 +681,8 @@ const App = () => {
           player: player1.name,
           message: `${player1.name} won diagnoally!`,
         });
-        setPlayer1({ ...player1, wins: player1.wins + 1 });
-        setPlayer2({ ...player2, losses: player2.losses + 1 });
+        setPlayer1({ ...player1, wins: player1.wins + 1, turn: true });
+        setPlayer2({ ...player2, losses: player2.losses + 1, turn: false });
         setCurrentValue(0);
       }
     } else if (allPlays.length === 9) {
