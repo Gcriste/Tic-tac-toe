@@ -220,6 +220,7 @@ const App = () => {
 
   useEffect(() => {
     checkNumber();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allPlays]);
 
   useEffect(() => {
@@ -227,6 +228,7 @@ const App = () => {
     if (player2.name === 'Computer' && player2.turn) {
       setTimeout(generateComputerMove, 2000);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOne, isTwo, isThree, isFour, isFive, isSix, isSeven, isEight, isNine]);
 
   const allPlaysEvenorOdd = () => {
