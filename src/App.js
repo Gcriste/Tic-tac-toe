@@ -852,17 +852,21 @@ const App = () => {
                 </Button>
               </Grid>
 
-              <Grid item xs={8}>
+              <Grid item xs={6}>
                 <Typography variant='h6'>Player 1: {player1.name}</Typography>
               </Grid>
-              <Grid item xs={4}>
-                <Typography variant='h6'>Wins: {player1.wins}</Typography>
+              <Grid item xs={6}>
+                <Typography variant='h6'>
+                  Player 1 wins: {player1.wins}
+                </Typography>
               </Grid>
-              <Grid item xs={8}>
+              <Grid item xs={6}>
                 <Typography variant='h6'>Player 2: {player2.name}</Typography>
               </Grid>
-              <Grid item xs={4}>
-                <Typography variant='h6'>Wins: {player2.wins}</Typography>
+              <Grid item xs={6}>
+                <Typography variant='h6'>
+                  Player 2 wins: {player2.wins}
+                </Typography>
               </Grid>
               <Grid item xs={12} sx={{ marginBottom: '10px' }}>
                 <Typography variant='h6'>
